@@ -1,0 +1,33 @@
+plugins {
+  id 'org.springframework.boot' version '2.3.1.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+  id 'java'
+}
+
+project.group = 'com.marcnuri.demo.spring-eclipselink'
+project.version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.eclipse.persistence:eclipselink:2.7.7'
+  implementation('org.springframework.boot:spring-boot-starter-actuator')
+  implementation('org.springframework.boot:spring-boot-starter-data-jpa'){
+    exclude group: 'org.hibernate', module: 'hibernate-core'
+    exclude group: 'org.hibernate.common', module: 'common-annotations'
+  }
+  compileOnly "org.projectlombok:lombok:1.18.12"
+  annotationProcessor "org.projectlombok:lombok:1.18.12"
+  runtimeOnly 'com.h2database:h2:1.4.200'
+  testImplementation('org.springframework.boot:spring-boot-starter-test') {
+    exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+  }
+}
+
+test {
+  useJUnitPlatform()
+}
